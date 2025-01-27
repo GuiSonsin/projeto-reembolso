@@ -3,6 +3,7 @@ const expense = document.getElementById("expense")
 const category = document.getElementById("category")
 const form = document.querySelector("form")
 const expenseList = document.querySelector("ul")
+const expensesQuantity = document.querySelector("aside header p span")
 
 amount.oninput = () =>{
     let value = amount.value.replace(/\D/g, "")
@@ -68,8 +69,21 @@ function expenseAdd(newExpense){
         expenseItem.append(expenseIcon, expenseInfo, expenseAmount, removeItem)
 
         expenseList.append(expenseItem)
+
+        updateTotals()
     } catch (error) {
         alert("Não foi possível atualizar a lista de despesas.")
+        console.log(error)
+    }
+}
+
+function updateTotals(){
+    try {
+        const items = expenseList.children
+
+        expensesQuantity.textContent = `${items.length} ${items.length == 1 ? "despesa" : "despesas"}`
+    } catch (error) {
+        alert("Não foi possível atualizar os totais!")
         console.log(error)
     }
 }
