@@ -41,7 +41,7 @@ form.onsubmit = (event) =>{
 function expenseAdd(newExpense){
     try {
         const expenseItem = document.createElement("li")
-        expense.classList.add("expense")
+        expenseItem.classList.add("expense")
 
         const expenseIcon = document.createElement("img")
         expenseIcon.setAttribute("src", `img/${newExpense.category_id}.svg`)
@@ -115,3 +115,13 @@ function updateTotals(){
         console.log(error)
     }
 }
+
+expenseList.addEventListener("click", function (event){
+    if(event.target.classList.contains("remove-icon")){
+        const item = event.target.closest(".expense")
+        item.remove()
+    } 
+    
+    updateTotals()
+
+})
